@@ -1,0 +1,27 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  position: relative;
+}
+
+input[type=file] {
+  display: none;
+}
+
+label[for=audio] {
+  position: absolute;
+  background-color: crimson;
+  padding: 10px;
+  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+}
+
+audio {
+  position: fixed;
+  left: 10px;
+  bottom: 20px;
+  width: calc(100% - 20px);
+}
