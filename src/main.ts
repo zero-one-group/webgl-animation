@@ -6,6 +6,7 @@ import RAF from './RAF'
 const container = document.querySelector('#container') as HTMLElement
 const audio = document.querySelector('#audio') as HTMLInputElement
 const player = document.querySelector('#player') as HTMLMediaElement
+const audioTitle = document.querySelector('#audio-title') as HTMLElement
 
 const renderer = new THREE.WebGLRenderer({ antialias: true });
 renderer.setSize(window.innerWidth, window.innerHeight);
@@ -22,7 +23,7 @@ const camera = new THREE.PerspectiveCamera(
   0.1,
   1000
 );
-camera.position.set(0, 0, 10);
+camera.position.set(0, 0, 5);
 // Make user can control the camera
 const controls = new OrbitControls(camera, renderer.domElement);
 controls.maxDistance = 1500;
@@ -43,12 +44,12 @@ function play() {
 
   // create 30 random cube
   const strandGroup = new THREE.Group();
-  for (let i = 0; i < 30; i++) {
-    const r = Math.random() * 10;
+  for (let i = 0; i < 20; i++) {
+    const height = Math.random() * 10;
     const xRotate = Math.random() * Math.PI * 2;
     const zRotate = Math.random() * Math.PI * 2;
-    const thickness = Math.random() * 0.001 // make it not so big
-    const strand = new THREE.BoxGeometry(1, r, 1);
+    const thickness = Math.random() * 0.01 // make it not so big
+    const strand = new THREE.BoxGeometry(1, height, 1);
     const material = new THREE.MeshNormalMaterial();
     const mesh = new THREE.Mesh(strand, material);
     mesh.rotation.set(xRotate, 0, zRotate);
@@ -61,8 +62,8 @@ function play() {
     // Get audio frequency data
     analyser.getByteFrequencyData(dataArray);
 
-    // the 0.01 are just a random number that I use so the number arent get too big
-    const reducer = 0.001
+    // the 0.01 are just a random number that I use so the wave number arent get too big
+    const reducer = 0.01
     // lower wave half
     const lowerHalfArray = dataArray.slice(0, (dataArray.length / 2) - 1);
     // upper wave half
@@ -117,6 +118,7 @@ audio.addEventListener('change', (e: Event) => {
   // load files and play visualizer
   const files = (<HTMLInputElement>e.target).files
   if (!files?.length) return
+  audioTitle.innerText = files[0].name
   player.src = URL.createObjectURL(files[0])
   context.resume()
   player.load()

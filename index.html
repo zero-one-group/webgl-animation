@@ -4,12 +4,14 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite App</title>
+    <title>WebGL Music Visualization</title>
   </head>
   <body>
+    <p id="audio-title">No Music Selected</p>
     <label for="audio">Choose music file</label>
     <input type="file" id="audio" accept="audio/*">
     <audio id="player" controls></audio>
+    <a href="https://github.com/zero-one-group/webgl-animation">Source Code</a>
     <div id="container"></div>
     <script type="module" src="/src/main.ts"></script>
   </body>
