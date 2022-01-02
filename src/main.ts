@@ -117,7 +117,9 @@ audio.addEventListener('change', (e: Event) => {
   audioSrc.disconnect()
   // load files and play visualizer
   const files = (<HTMLInputElement>e.target).files
-  if (!files?.length) return
+  // the ts compiler screaming without this smh ~ 
+  if (!files) return
+  if (!files.length) return
   audioTitle.innerText = files[0].name
   player.src = URL.createObjectURL(files[0])
   context.resume()
